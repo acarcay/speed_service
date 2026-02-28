@@ -12,6 +12,7 @@
  *   - vse::SpeedEstimator           (speed_estimator.hpp)
  *   - vse::TrackManager             (speed_estimator.hpp)
  *   - vse::PerspectiveCalibrator    (perspective_calibrator.hpp)
+ *   - vse::TrafficOrchestrator      (traffic_orchestrator.hpp)
  *
  * Avoid including individual sub-headers; use this file everywhere so that
  * the dependency graph remains explicit and refactoring remains cheap.
@@ -26,4 +27,5 @@
 #include "network_trigger.hpp"
 #include "perspective_calibrator.hpp"
 #include "speed_estimator.hpp"
+#include "traffic_orchestrator.hpp"
 #include "types.hpp"
