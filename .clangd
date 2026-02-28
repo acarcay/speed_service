@@ -1,20 +1,27 @@
 CompileFlags:
   Add:
     # Enforce C++20 — matches CMakeLists.txt CMAKE_CXX_STANDARD 20.
-    # Resolves std::is_trivially_copyable_v, std::is_standard_layout_v, etc.
     - "-std=c++20"
 
     # Project include root
     - "-I./include"
 
-    # OpenCV 4 — Homebrew installs to /opt/homebrew on Apple Silicon (M1/M2/M3)
+    # OpenCV 4 — Homebrew (Apple Silicon)
     - "-I/opt/homebrew/include/opencv4"
-    # Intel Mac fallback
+    # OpenCV 4 — Homebrew (Intel Mac fallback)
     - "-I/usr/local/include/opencv4"
 
+    # pybind11 — Homebrew 3.0.2
+    - "-I/opt/homebrew/Cellar/pybind11/3.0.2/include"
+
+    # CPython headers — system Python 3.11 (macOS framework)
+    - "-I/Library/Frameworks/Python.framework/Versions/3.11/include/python3.11"
+    # CPython headers — Homebrew Python fallback paths
+    - "-I/opt/homebrew/include/python3.12"
+    - "-I/opt/homebrew/include/python3.11"
+
 Diagnostics:
-  # Suppress IWYU "not used directly" warnings.
-  # pipeline.hpp is an umbrella header — re-exporting sub-headers is intentional.
+  # Suppress IWYU "not used directly" warnings on umbrella headers.
   ClangTidy:
     Remove:
       - misc-include-cleaner

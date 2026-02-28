@@ -46,9 +46,17 @@ target_link_options(vse_compile_options INTERFACE
 # ---------------------------------------------------------------------------
 find_package(Threads REQUIRED)
 
-# OpenCV — only the video module (KalmanFilter) is strictly needed.
-# Adjust the COMPONENTS list if additional modules are required later.
-find_package(OpenCV REQUIRED COMPONENTS core video)
+# OpenCV — video (KalmanFilter) + imgproc (Canny/HoughLinesP) + calib3d
+# (getPerspectiveTransform) needed by PerspectiveCalibrator.
+find_package(OpenCV REQUIRED COMPONENTS core video imgproc calib3d)
+
+# pybind11 — installed via Homebrew: brew install pybind11
+# The Homebrew CMake config file is used; fall back to pip-installed pybind11
+# if the Homebrew one is not found.
+find_package(pybind11 REQUIRED
+    PATHS /opt/homebrew/share/cmake/pybind11  # Apple Silicon
+          /usr/local/share/cmake/pybind11     # Intel Mac
+)
 
 # ---------------------------------------------------------------------------
 # Header-only library target  (all current code lives in headers)
@@ -72,7 +80,20 @@ add_executable(vse_smoke_test src/smoke_test.cpp)
 target_link_libraries(vse_smoke_test PRIVATE vse_pipeline)
 
 # ---------------------------------------------------------------------------
+# Python extension module  (pybind11)
+# ---------------------------------------------------------------------------
+# Build:  cmake -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build
+# Result: build/vse_core<python_suffix>.so  (importable as `import vse_core`)
+#
+# GIL policy: C++ worker threads NEVER call back into CPython, so they
+# require no GIL ownership.  The Python-facing methods that do heavy work
+# release the GIL explicitly via py::gil_scoped_release.
+pybind11_add_module(vse_core src/bindings.cpp)
+target_link_libraries(vse_core PRIVATE vse_pipeline)
+
+# ---------------------------------------------------------------------------
 # Install rules (for packaging as a sysroot component)
 # ---------------------------------------------------------------------------
 include(GNUInstallDirs)
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/vse)
+install(TARGETS vse_core LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
