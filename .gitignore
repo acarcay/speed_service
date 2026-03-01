@@ -1,0 +1,21 @@
+# Build artifacts
+build/
+*.so
+*.dylib
+*.o
+
+# Video/model files (too large for GitHub)
+*.mp4
+*.webm
+*.avi
+*.mov
+*.pt
+*.onnx
+
+# Python cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# macOS
+.DS_Store
