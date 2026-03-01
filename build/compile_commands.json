@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/build",
+  "command": "/usr/bin/c++  -I/Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/include -isystem /opt/homebrew/Cellar/opencv/4.13.0_3/include/opencv4 -O3 -DNDEBUG -std=c++20 -arch arm64 -Wall -Wextra -Wpedantic -Wshadow -Wno-unused-parameter -march=native -ffast-math -O3 -o CMakeFiles/vse_smoke_test.dir/src/smoke_test.cpp.o -c /Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/src/smoke_test.cpp",
+  "file": "/Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/src/smoke_test.cpp",
+  "output": "CMakeFiles/vse_smoke_test.dir/src/smoke_test.cpp.o"
+},
+{
+  "directory": "/Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/build",
+  "command": "/usr/bin/c++ -Dvse_core_EXPORTS -I/Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/include -isystem /opt/homebrew/include -isystem /Library/Frameworks/Python.framework/Versions/3.11/include/python3.11 -isystem /opt/homebrew/Cellar/opencv/4.13.0_3/include/opencv4 -O3 -DNDEBUG -std=c++20 -arch arm64 -fPIC -fvisibility=hidden -flto -Wall -Wextra -Wpedantic -Wshadow -Wno-unused-parameter -march=native -ffast-math -O3 -o CMakeFiles/vse_core.dir/src/bindings.cpp.o -c /Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/src/bindings.cpp",
+  "file": "/Users/acar/.gemini/antigravity/scratch/vehicle_speed_service/src/bindings.cpp",
+  "output": "CMakeFiles/vse_core.dir/src/bindings.cpp.o"
+}
+]

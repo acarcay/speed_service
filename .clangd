@@ -6,15 +6,18 @@ CompileFlags:
     # Project include root
     - "-I./include"
 
+    # Homebrew general include dir (covers pybind11 symlink + other formulae)
+    - "-I/opt/homebrew/include"
+
     # OpenCV 4 — Homebrew (Apple Silicon)
     - "-I/opt/homebrew/include/opencv4"
     # OpenCV 4 — Homebrew (Intel Mac fallback)
     - "-I/usr/local/include/opencv4"
 
-    # pybind11 — Homebrew 3.0.2
+    # pybind11 — explicit versioned path (Apple Silicon)
     - "-I/opt/homebrew/Cellar/pybind11/3.0.2/include"
 
-    # CPython headers — system Python 3.11 (macOS framework)
+    # CPython headers — system Python 3.11 (macOS framework build)
     - "-I/Library/Frameworks/Python.framework/Versions/3.11/include/python3.11"
     # CPython headers — Homebrew Python fallback paths
     - "-I/opt/homebrew/include/python3.12"
